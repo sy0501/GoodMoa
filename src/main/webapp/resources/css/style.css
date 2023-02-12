@@ -1049,21 +1049,6 @@ input:focus{
 
 /* --------------End of 게임별 페이지------------- */
 
-/* #admin{
-    display: none;
-}
-
-.adminBtn{
-    display: none;
-    margin-left: 1000px;
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 100px;
-    background-color: lightblue;
-    border: transparent;
-    border-radius: 5px;
-} */
-
 .adminHeader{
     width: 1200px;
     margin: 0 auto;
