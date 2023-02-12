@@ -66,11 +66,7 @@
 	                        		<button type="button" id="listBtn">목록</button>
 	                    		</c:otherwise>
 	                    	</c:choose>
-	                    	<!-- <input type="button" id="writeBtn" value="등록">
-                       		<input type="button" value="취소" onclick="back()">
-                       		<button type="button" id="modifyBtn">수정</button>
-                   			<button type="button" id="removeBtn">삭제</button>
-                       		<button type="button" id="listBtn">목록</button>  -->
+	                    	
 	                    </td>
 	                </tr>
 	              </table>
