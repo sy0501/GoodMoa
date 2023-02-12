@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.goodmoa.shop.dao.CartMapper">
+	<insert id="addCart" parameterType="CartDto">
+		INSERT INTO cart(cart_num, product_num, custom_id, cart_count)
+		VALUES(cart_seq.nextval, #{product_num}, #{custom_id}, #{cart_count})
+	</insert>
+	
+	<select id="countCart" resultType="int">
+		SELECT count(*)
+		FROM cart
+		WHERE custom_id=#{custom_id} AND product_num=#{product_num}
+	</select>
+	
+	<update id="updateCart">
+		UPDATE cart
+		SET cart_count= cart_count + #{cart_count}
+		WHERE custom_id=#{custom_id} AND product_num=#{product_num}
+	</update>
+	
+	<select id="cartList" resultType="CartDto">
+	   SELECT
+	       row_number() over(order by c.cart_num desc) as num,
+	       c.cart_num, c.custom_id, c.product_num, c.cart_count, p.product_name, p.product_price
+	   FROM cart c
+	       inner join product p
+	       on c.product_num = p.product_num
+	       where c.custom_id = #{custom_id}
+	</select>
+	
+	<delete id="deleteCart">
+		DELETE FROM cart
+		WHERE cart_num=#{cart_num}
+	</delete>
+	
+	
+	<select id="sumPrice" resultType="int">
+		SELECT NVL(SUM(p.product_price * c.cart_count),0) sumPrice
+		FROM cart c, product p
+		WHERE c.product_num = p.product_num AND c.custom_id=#{custom_id}
+	</select>
+	
+</mapper>

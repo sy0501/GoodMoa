@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="CustomerDto" type="com.goodmoa.shop.CustomerDto"/>
+		<typeAlias alias="QnaDto" type="com.goodmoa.shop.QnaDto"/>
+		<typeAlias alias="CartDto" type="com.goodmoa.shop.CartDto"/>
+		<typeAlias alias="ProductDto" type="com.goodmoa.shop.ProductDto"/>
+		<typeAlias alias="SearchCondition" type="com.goodmoa.shop.SearchCondition"/>
+	</typeAliases>
+</configuration>

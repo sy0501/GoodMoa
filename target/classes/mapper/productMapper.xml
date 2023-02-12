@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.goodmoa.shop.dao.ProductMapper">
+	<insert id="insert" parameterType="ProductDto">
+		INSERT INTO product(product_num, cate_code, product_name, product_price, product_stock, product_best, product_discount)
+		VALUES(#{product_num}, #{cate_code}, #{product_name}, #{product_price}, #{product_stock}, #{product_best}, #{product_discount})
+	</insert>
+	
+	<select id="selectBest" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+		WHERE product_best=1
+	</select>
+	
+	<select id="selectSale" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+		WHERE product_discount=1
+	</select>
+	
+	<select id="selectAll" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+	</select>
+	
+	<select id="selectDetail" parameterType="int" resultType="ProductDto">
+		SELECT product_num, cate_code, product_stock, product_name, product_price, product_content
+		FROM product
+		WHERE product_num=#{product_num}
+	</select>
+	
+	<select id="selectMaple" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+		WHERE substr(product_num,1,1)=1
+	</select>
+	
+	<select id="selectBattle" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+		WHERE substr(product_num,1,1)=2
+	</select>
+	
+	<select id="selectArk" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+		WHERE substr(product_num,1,1)=3
+	</select>
+	
+	<select id="selectKingdom" resultType="ProductDto">
+		SELECT product_num, cate_code, product_name, product_price, product_best, product_discount
+		FROM product
+		WHERE substr(product_num,1,1)=4
+	</select>
+	
+</mapper>

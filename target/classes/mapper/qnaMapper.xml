@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.goodmoa.shop.dao.QnaMapper">
+	<select id="select" parameterType="int" resultType="QnaDto">
+		SELECT qno, qna_title, qna_content, qna_date, qna_writer
+		FROM qna
+		WHERE qno=#{qno}
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT count(*)
+		FROM qna
+	</select>
+	
+	<insert id="insert" parameterType="QnaDto">
+		INSERT INTO qna(qno, qna_title, qna_content, qna_writer)
+		VALUES(qno_seq.nextval, #{qna_title}, #{qna_content}, #{qna_writer})
+	</insert>
+	
+	<update id="update" parameterType="QnaDto">
+		UPDATE qna
+		SET qna_title=#{qna_title}, qna_content=#{qna_content}
+		WHERE qno=#{qno} AND qna_writer=#{qna_writer}
+	</update>
+	
+	<delete id="delete" parameterType="map">
+		DELETE FROM qna
+		WHERE qno=#{qno} AND qna_writer=#{qna_writer}
+	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM qna
+	</delete>
+	
+	<select id="selectAll" resultType="QnaDto">
+		SELECT qno, qna_title, qna_content, qna_date, qna_writer
+		FROM qna
+		ORDER BY qno DESC, qna_date DESC
+	</select>
+	
+	<select id="selectPage" parameterType="map" resultType="QnaDto">
+		SELECT *
+		FROM (SELECT ROWNUM rNUM, A.*
+			FROM(SELECT qno, qna_title, qna_content, qna_date, qna_writer
+					FROM qna
+					ORDER BY qna_date DESC, qno DESC) A
+		)
+		WHERE rNUM between ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page},0) * #{pageSize})	
+		ORDER BY qno DESC, qna_date DESC
+	</select>
+	
+	
+</mapper>
